@@ -191,137 +191,18 @@ class _RegistrationScreenConsulteeScreenState
                     _buildSignUp(context),
                     SizedBox(height: 32.v),
                     Align(
-                      alignment: Alignment.centerRight,
-                      child: Padding(
-                        padding: EdgeInsets.only(right: 41.h),
-                        child: InkWell(
-                          onTap: (){
-                            Navigator.pushNamed(context, '/login_screen');
-                          },
-                          child: Text(
-                            "Already have an account",
-                            style: CustomTextStyles.titleMediumOnPrimary,
-                          ),
+                      alignment: Alignment.center,
+                      child: InkWell(
+                        onTap: (){
+                          Navigator.pushNamed(context, '/login_screen');
+                        },
+                        child: Text(
+                          "Already have an account",
+                          style: CustomTextStyles.titleMediumOnPrimary,
                         ),
                       ),
                     ),
                     SizedBox(height: 39.v),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 5.h,
-                        right: 13.h,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: 10.v,
-                              bottom: 11.v,
-                            ),
-                            child: SizedBox(
-                              width: 70.h,
-                              child: Divider(),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 7.h),
-                            child: Text(
-                              "Or Login with",
-                              style: theme.textTheme.bodyMedium,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: 10.v,
-                              bottom: 11.v,
-                            ),
-                            child: SizedBox(
-                              width: 70.h,
-                              child: Divider(
-                                indent: 5.h,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 36.v),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 79.h),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 24.v,
-                            width: 25.h,
-                            child: Stack(
-                              alignment: Alignment.bottomLeft,
-                              children: [
-                                CustomImageView(
-                                  imagePath: ImageConstant.imgUser,
-                                  height: 11.v,
-                                  alignment: Alignment.bottomRight,
-                                  margin: EdgeInsets.only(bottom: 3.v),
-                                ),
-                                CustomImageView(
-                                  imagePath: ImageConstant.imgMobile,
-                                  height: 10.v,
-                                  alignment: Alignment.bottomLeft,
-                                  margin: EdgeInsets.only(left: 1.h),
-                                ),
-                                CustomImageView(
-                                  imagePath: ImageConstant.imgVectorOnerror,
-                                  width: 5.h,
-                                  alignment: Alignment.centerLeft,
-                                ),
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Container(
-                                    height: 10.v,
-                                    width: 19.h,
-                                    margin: EdgeInsets.only(left: 1.h),
-                                    child: Stack(
-                                      alignment: Alignment.center,
-                                      children: [
-                                        CustomImageView(
-                                          imagePath:
-                                          ImageConstant.imgUserRed500,
-                                          height: 10.v,
-                                          alignment: Alignment.center,
-                                        ),
-                                        CustomImageView(
-                                          imagePath:
-                                          ImageConstant.imgUserRed500,
-                                          height: 10.v,
-                                          alignment: Alignment.center,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Spacer(
-                            flex: 50,
-                          ),
-                          CustomImageView(
-                            imagePath: ImageConstant.imgVector,
-                            width: 23.h,
-                          ),
-                          Spacer(
-                            flex: 49,
-                          ),
-                          CustomImageView(
-                            imagePath: ImageConstant.imgFacebook,
-                            height: 25.adaptSize,
-                            width: 25.adaptSize,
-                          ),
-                        ],
-                      ),
-                    ),
                     SizedBox(height: 6.v),
                   ],
                 ),
