@@ -1,23 +1,106 @@
-import 'package:educonsult/widgets/custom_text_form_field.dart';
-import 'package:educonsult/widgets/custom_elevated_button.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:educonsult/core/app_export.dart';
 
-class RegistrationScreenConsulteeScreen extends StatelessWidget {
-  RegistrationScreenConsulteeScreen({Key? key})
-      : super(
-          key: key,
-        );
+import '../../widgets/custom_elevated_button.dart';
+import '../../widgets/custom_text_form_field.dart';
+import 'package:http/http.dart' as http;
 
+class RegistrationScreenConsulteeScreen extends StatefulWidget {
+  RegistrationScreenConsulteeScreen({Key? key}) : super(key: key);
+
+  @override
+  _RegistrationScreenConsulteeScreenState createState() =>
+      _RegistrationScreenConsulteeScreenState();
+}
+
+class _RegistrationScreenConsulteeScreenState
+    extends State<RegistrationScreenConsulteeScreen> {
   TextEditingController nameController = TextEditingController();
-
   TextEditingController emailController = TextEditingController();
-
   TextEditingController passwordController = TextEditingController();
-
   TextEditingController confirmpasswordController = TextEditingController();
-
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  bool checkRegistrationFieldsnotEmpty() {
+    if (nameController.text.toString().isEmpty) {
+      alert("Please enter name!!");
+      return false;
+    } else if (emailController.text.toString().isEmpty) {
+      alert("Please enter email!!");
+      return false;
+    } else if (passwordController.text.toString().isEmpty) {
+      alert("Please enter password!!");
+      return false;
+    } else if (confirmpasswordController.text.toString().isEmpty) {
+      alert("Please re-enter password!!");
+      return false;
+    } else if (passwordController.text.toString() != confirmpasswordController.text.toString()) {
+      alert("Password and Confirm password doesn't match!!");
+      return false;
+    } else
+      return true;
+  }
+
+  Future<void> Register() async
+  {
+    try{
+      var url = Uri.parse("http://192.168.52.145/EduConsult_API/upload_consultant_reg_details.php");
+
+      print(nameController.text.toString());
+      print(emailController.text.toString());
+      print(passwordController.text.toString());
+      print(confirmpasswordController.text.toString());
+      // print(imageNameID);
+      // print(imageDataID);
+
+      var response = await http.post(url, body: {
+        'consultee_name' : nameController.text.toString(),
+        'consultee_email' : emailController.text.toString(),
+        'consultee_password' : passwordController.text.toString(),
+      });
+
+      if (response.body.isNotEmpty) {
+        var res = jsonDecode(response.body);
+
+        if (res.containsKey("error")) {
+          // Handle error
+          print("Error: ${res["error"]}");
+          // RegistrationSuccessalert("Error while Registration, Please try again..");
+
+        } else if (res.containsKey("message")) {
+          // Handle success
+          print("Success: ${res["message"]}");
+          // RegistrationSuccessalert("Registration Successfull");
+
+        }
+      }
+
+    }
+    catch(e){print(e);
+    }
+  }
+
+  void alert(String content) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Alert'),
+          content: Text('$content'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -158,13 +241,13 @@ class RegistrationScreenConsulteeScreen extends StatelessWidget {
                                       children: [
                                         CustomImageView(
                                           imagePath:
-                                              ImageConstant.imgUserRed500,
+                                          ImageConstant.imgUserRed500,
                                           height: 10.v,
                                           alignment: Alignment.center,
                                         ),
                                         CustomImageView(
                                           imagePath:
-                                              ImageConstant.imgUserRed500,
+                                          ImageConstant.imgUserRed500,
                                           height: 10.v,
                                           alignment: Alignment.center,
                                         ),
@@ -261,6 +344,9 @@ class RegistrationScreenConsulteeScreen extends StatelessWidget {
   /// Section Widget
   Widget _buildSignUp(BuildContext context) {
     return CustomElevatedButton(
+      onPressed: (){
+        checkRegistrationFieldsnotEmpty();
+      },
       height: 50.v,
       text: "Sign up",
     );

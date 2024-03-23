@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:educonsult/core/app_export.dart';
 import 'package:educonsult/widgets/custom_drop_down.dart';
@@ -278,9 +277,14 @@ class _RegistrationScreenConsultantScreenState
                     SizedBox(height: 19.v),
                     _buildSignUp(context),
                     SizedBox(height: 33.v),
-                    Text(
-                      "Already have an account",
-                      style: CustomTextStyles.titleMediumOnPrimary,
+                    InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context,'/login_screen');
+                      },
+                      child: Text(
+                        "Already have an account",
+                        style: CustomTextStyles.titleMediumOnPrimary,
+                      ),
                     ),
                     SizedBox(height: 5.v),
                   ],
