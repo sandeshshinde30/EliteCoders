@@ -127,6 +127,9 @@ class _HomeScreenConsultantScreenState
                 child: Row(
                   children: [
                     CustomElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/request_loader');
+                      },
                       width: 134.h,
                       text: "Requests",
                       buttonStyle: CustomButtonStyles.fillLightBlueE,
@@ -134,6 +137,10 @@ class _HomeScreenConsultantScreenState
                           CustomTextStyles.titleMediumInterGray20002,
                     ),
                     CustomElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context, '/consultant_chat_list_container_screen');
+                      },
                       width: 134.h,
                       text: "Chats",
                       margin: EdgeInsets.only(left: 8.h),
