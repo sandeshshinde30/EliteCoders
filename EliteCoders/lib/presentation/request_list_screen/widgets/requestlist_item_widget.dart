@@ -29,10 +29,12 @@ class _RequestlistItemWidgetState extends State<RequestlistItemWidget> {
   late SharedPreferences prefCheckLogin;
   var consultant_name;
   late String consulteeName;
+  late String designation;
 
   Future<void> initializePreferences() async {
     prefCheckLogin  = await SharedPreferences.getInstance();
     consultant_name = prefCheckLogin.getString("name")!;
+    designation = prefCheckLogin.getString("designation")!;
   }
 
   @override
@@ -149,20 +151,23 @@ class _RequestlistItemWidgetState extends State<RequestlistItemWidget> {
       var response = await http.post(url, body: {
         'ConsultantName': consultant_name,
         'ConsulteeName': consulteeName,
-        'Status' : status
+        'Status' : status,
+        'designation': designation
       });
 
       if (response.body.isNotEmpty) {
         data = jsonDecode(response.body);
 
         print(data);
+        print(status);
 
         var title = "";
         var content = "";
 
-        if (data == "true") {
+        if (data.containsKey("message")) {
           if(status == "Accept")
             {
+              await createTable(context);
               title = "Request Accepted";
               content = "The request has been successfully accepted.";
             }
@@ -215,6 +220,36 @@ class _RequestlistItemWidgetState extends State<RequestlistItemWidget> {
       // Handle error appropriately
     }
   }
+
+  Future<void> createTable(BuildContext context) async {
+    var data;
+    try {
+      var url = Uri.parse("http://192.168.52.145/Educonsult_API/create_chat_table.php");
+
+      var response = await http.post(url, body: {
+        'ConsultantName': consultant_name,
+        'ConsulteeName': consulteeName
+      });
+
+      if (response.body.isNotEmpty) {
+        data = jsonDecode(response.body);
+
+        print(data);
+
+        var title = "";
+        var content = "";
+
+        if (data.containsKey("message")) {
+             print("Table Created");
+        }
+      }
+    } catch (e) {
+      print("Table Creation failed: $e");
+      // Handle error appropriately
+    }
+  }
+
 }
+
 
 

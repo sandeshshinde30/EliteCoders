@@ -268,7 +268,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
           // If login success then storing name
 
-          prefs.setString("name", Data['name']);
+          prefs.setString("username", Data['Username']);
           prefs.setString("designation", Data['designation']);
           prefs.setBool("login", true);
 

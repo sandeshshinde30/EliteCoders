@@ -45,7 +45,6 @@ class _RequestLoaderState extends State<RequestLoader> {
 
   Future<void> fetchRequest(BuildContext context) async
   {
-
     try {
       var url = Uri.parse("http://192.168.52.145/Educonsult_API/see_requests.php");
 

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:educonsult/core/app_export.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_form_field.dart';
 import 'package:http/http.dart' as http;
@@ -114,7 +113,6 @@ class _RegistrationScreenConsulteeScreenState
                 if(designation == "consultee") Navigator.pushReplacementNamed(context, '/home_screen_consultee_screen' );
                 else Navigator.pushReplacementNamed(context, '/home_screen_consultant_screen');
               },
-
               child: Text('OK'),
             ),
           ],
