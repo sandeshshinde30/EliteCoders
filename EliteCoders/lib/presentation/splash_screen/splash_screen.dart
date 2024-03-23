@@ -36,7 +36,6 @@ class _SplashScreenState extends State<SplashScreen> {
     if(loginOrNot == null || loginOrNot == "")
     {
       Timer(Duration(seconds:2),()=>Navigator.pushNamed(context,'/login_register_screen'));
-
     }
     // else
     else if(!loginOrNot)
