@@ -109,11 +109,11 @@ class _ConsulteeProfilePageState extends State<ConsulteeProfilePage> {
                     text: "Save changes",
                     alignment: Alignment.center,
                   ),
-                  SizedBox(height: 50.v),
+                  SizedBox(height: 30.v),
                   Center(
                     child: SizedBox(
-                      height: 45,
-                      width: 220,
+                      height: 45.v,
+                      width: 220.h,
                       child: ElevatedButton(
                         onPressed: () async {
                           prefs.setString("name","");
@@ -131,12 +131,13 @@ class _ConsulteeProfilePageState extends State<ConsulteeProfilePage> {
                           }
                         },
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                          backgroundColor: MaterialStateProperty.all<Color>(Color(
+                              0xffd7e5fd)),
                         ),
                         child: Text(
                           'Log Out',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Color(0xff172452),
                             fontSize: 18,
                           ),
                         ),
