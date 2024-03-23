@@ -45,7 +45,7 @@ class ConsulteeChatListContainerScreen extends StatelessWidget {
       case BottomBarEnum.Home:
         return AppRoutes.homeScreenConsulteeScreen;
       case BottomBarEnum.College:
-        return AppRoutes.collegeListScreen;
+        return AppRoutes.college_list_loader;
       case BottomBarEnum.Chat:
         return AppRoutes.consulteeChatListContainerScreen;
       case BottomBarEnum.Profile:
