@@ -199,6 +199,9 @@ class _HomeScreenConsultantScreenState
             ),
             Spacer(),
             CustomImageView(
+              onTap: () {
+                Navigator.pushNamed(context, '/notification_screen');
+              },
               imagePath: ImageConstant.imgNotificationsUnread,
               height: 28.v,
               width: 27.h,
@@ -273,10 +276,10 @@ class _HomeScreenConsultantScreenState
           Navigator.pushReplacementNamed(context, currentRoute);
         }
         else if(currentRoute == AppRoutes.request_loader) {
-          Navigator.pushReplacementNamed(context, currentRoute);
+          Navigator.pushNamed(context, currentRoute);
         }
         else {
-          Navigator.pushReplacementNamed(context, getCurrentRoute(type));
+          Navigator.pushNamed(context, getCurrentRoute(type));
         }
 
         // }
