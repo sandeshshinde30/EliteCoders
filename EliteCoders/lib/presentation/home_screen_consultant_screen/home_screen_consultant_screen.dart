@@ -272,19 +272,19 @@ class _HomeScreenConsultantScreenState
       child: Container(
         margin: EdgeInsets.only(left: 20.h, right: 20.h),
         padding: EdgeInsets.symmetric(
-          horizontal: 29.h,
-          vertical: 21.v,
+          horizontal: 20.h,
+          vertical: 10.v,
         ),
         decoration: AppDecoration.outlineBlueGray.copyWith(
           borderRadius: BorderRadiusStyle.roundedBorder20,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CustomImageView(
               imagePath: ImageConstant.imgSignal,
               width: 54.h,
-              margin: EdgeInsets.only(bottom: 1.v),
+              margin: EdgeInsets.only(bottom: 1.v,right: 10.h),
             ),
             Padding(
               padding: EdgeInsets.only(

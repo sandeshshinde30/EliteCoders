@@ -156,7 +156,7 @@ class CustomTextStyles {
   static get titleLargeBluegray90001Bold =>
       theme.textTheme.titleLarge!.copyWith(
         color: appTheme.blueGray90001,
-        fontSize: 22.fSize,
+        fontSize: 20.fSize,
         fontWeight: FontWeight.w700,
       );
 }
