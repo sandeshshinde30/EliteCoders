@@ -1,10 +1,13 @@
 
+
 import 'package:flutter/material.dart';
 import '../presentation/chat_screen/chat_screen.dart';
 import '../presentation/college_consultant_list_screen/college_consultant_list_screen.dart';
 import '../presentation/college_list_screen/college_list_loader.dart';
 import '../presentation/college_list_screen/college_list_screen.dart';
 import '../presentation/consultant_chat_list_container_screen/consultant_chat_list_container_screen.dart';
+import '../presentation/consultant_chat_list_page/consultant_chat_list_page.dart';
+import '../presentation/consultant_chat_list_page/consultant_chat_loader.dart';
 import '../presentation/consultant_profile_screen/consultant_profile_screen.dart';
 import '../presentation/consultee_chat_list_container_screen/consultee_chat_list_container_screen.dart';
 import '../presentation/consultee_profile_container_screen/consultee_profile_container_screen.dart';
@@ -62,6 +65,7 @@ class AppRoutes {
 
   static const String consultantChatListPage = '/consultant_chat_list_page';
 
+
   static const String consultantProfileScreen = '/consultant_profile_screen';
 
   static const String homeScreenConsultantScreen =
@@ -80,6 +84,9 @@ class AppRoutes {
 
   static const String registrationScreenConsultantScreen =
       '/registration_screen_consultant_screen';
+
+  static const String consultantChatLoader =
+      '/consultantChatLoader';
 
   static Map<String, WidgetBuilder> routes = {
     splashScreen: (context) => SplashScreen(),
@@ -106,5 +113,7 @@ class AppRoutes {
     iAmScreen: (context) => IAmScreen(),
     registrationScreenConsulteeScreen: (context) => RegistrationScreenConsulteeScreen(),
     registrationScreenConsultantScreen: (context) => RegistrationScreenConsultantScreen(),
+    consultantChatLoader : (context) => consultant_chat_loader(),
+    consultantChatListPage : (context) => ConsultantChatListPage(),
   };
 }

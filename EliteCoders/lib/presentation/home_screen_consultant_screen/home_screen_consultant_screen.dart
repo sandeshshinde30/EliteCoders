@@ -343,7 +343,7 @@ class _HomeScreenConsultantScreenState
       case BottomBarEnum.Requests:
         return AppRoutes.request_loader;
       case BottomBarEnum.Chat:
-        return AppRoutes.consultantChatListContainerScreen;
+        return AppRoutes.consultantChatLoader;
       case BottomBarEnum.Profile:
         return AppRoutes.consultantProfileScreen;
       default:
