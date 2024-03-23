@@ -1,34 +1,22 @@
-import 'package:educonsult/presentation/consultant_chat_list_page/consultant_chat_list_page.dart';
-import 'package:educonsult/widgets/custom_text_form_field.dart';
-import 'package:educonsult/widgets/custom_drop_down.dart';
-import 'package:educonsult/widgets/custom_elevated_button.dart';
-import 'package:educonsult/widgets/custom_bottom_bar_consultant.dart';
 import 'package:flutter/material.dart';
 import 'package:educonsult/core/app_export.dart';
+import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../widgets/custom_bottom_bar.dart';
+import '../../widgets/custom_drop_down.dart';
+import '../../widgets/custom_elevated_button.dart';
+import '../../widgets/custom_text_form_field.dart';
 
 class ConsultantProfileScreen extends StatelessWidget {
-  ConsultantProfileScreen({Key? key})
-      : super(
-          key: key,
-        );
+  ConsultantProfileScreen({Key? key}) : super(key: key);
 
   TextEditingController nameController = TextEditingController();
-
   TextEditingController emailController = TextEditingController();
-
   TextEditingController twentyTwoController = TextEditingController();
-
   TextEditingController twentyTwoController1 = TextEditingController();
-
-  List<String> dropdownItemList = [
-    "Second Year",
-    "Third Year",
-    "Fourth Year"
-  ];
-
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey();
-
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  List<String> dropdownItemList = ["Second Year", "Third Year", "Fourth Year"];
+  var prefs;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +30,6 @@ class ConsultantProfileScreen extends StatelessWidget {
               bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
             child: Form(
-              key: _formKey,
               child: Container(
                 width: double.maxFinite,
                 padding: EdgeInsets.symmetric(
@@ -56,7 +43,7 @@ class ConsultantProfileScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       child: Text(
                         "Profile",
-                        style: TextStyle(color: Color(0xFF172452),fontSize: 30),
+                        style: TextStyle(color: Color(0xFF172452), fontSize: 30),
                       ),
                     ),
                     SizedBox(height: 12.v),
@@ -72,9 +59,7 @@ class ConsultantProfileScreen extends StatelessWidget {
                               imagePath: ImageConstant.imgPro,
                               height: 100.adaptSize,
                               width: 100.adaptSize,
-                              radius: BorderRadius.circular(
-                                37.h,
-                              ),
+                              radius: BorderRadius.circular(37.h),
                               alignment: Alignment.center,
                             ),
                           ],
@@ -116,20 +101,43 @@ class ConsultantProfileScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 3.v),
                     CustomDropDown(
-                      // icon: Container(
-                      //   margin: EdgeInsets.fromLTRB(30.h, 16.v, 20.h, 16.v),
-                      //   child: CustomImageView(
-                      //     imagePath: ImageConstant.imgArrowdown,
-                      //     height: 11.v,
-                      //     width: 14.h,
-                      //   ),
-                      // ),
-
                       hintText: "Second Year",
                       items: dropdownItemList,
                     ),
                     SizedBox(height: 36.v),
                     _buildSaveChanges(context),
+                    SizedBox(height: 36.v),
+                    Center(
+                      child: SizedBox(
+                        height: 45.v,
+                        width: 220.h,
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            prefs = await SharedPreferences.getInstance();
+                            prefs.setString("name", "");
+                            prefs.setString("designation", "");
+                            prefs.setBool("login", false);
+                            SystemNavigator.pop();
+                            bool? res = prefs.getBool("login");
+                            if (res == false) {
+                              SystemNavigator.pop();
+                            }
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              Color(0xffd7e5fd),
+                            ),
+                          ),
+                          child: Text(
+                            'Log Out',
+                            style: TextStyle(
+                              color: Color(0xff172452),
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     SizedBox(height: 6.v),
                   ],
                 ),
@@ -137,12 +145,20 @@ class ConsultantProfileScreen extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: _buildBottomBar(context),
+        bottomNavigationBar: CustomBottomBar(
+          onChanged: (BottomBarEnum type) {
+            final currentRoute = getCurrentRoute(type);
+            if (currentRoute == AppRoutes.homeScreenConsultantScreen) {
+              Navigator.pop(context);
+            } else {
+              Navigator.pushReplacementNamed(context, getCurrentRoute(type));
+            }
+          },
+        ),
       ),
     );
   }
 
-  /// Section Widget
   Widget _buildName(BuildContext context) {
     return CustomTextFormField(
       controller: nameController,
@@ -151,7 +167,6 @@ class ConsultantProfileScreen extends StatelessWidget {
     );
   }
 
-  /// Section Widget
   Widget _buildEmail(BuildContext context) {
     return CustomTextFormField(
       controller: emailController,
@@ -161,7 +176,6 @@ class ConsultantProfileScreen extends StatelessWidget {
     );
   }
 
-  /// Section Widget
   Widget _buildTwentyTwo(BuildContext context) {
     return CustomTextFormField(
       controller: twentyTwoController,
@@ -170,7 +184,6 @@ class ConsultantProfileScreen extends StatelessWidget {
     );
   }
 
-  /// Section Widget
   Widget _buildTwentyTwo1(BuildContext context) {
     return CustomTextFormField(
       controller: twentyTwoController1,
@@ -180,7 +193,6 @@ class ConsultantProfileScreen extends StatelessWidget {
     );
   }
 
-  /// Section Widget
   Widget _buildSaveChanges(BuildContext context) {
     return CustomElevatedButton(
       height: 45.v,
@@ -190,21 +202,6 @@ class ConsultantProfileScreen extends StatelessWidget {
     );
   }
 
-  /// Section Widget
-  Widget _buildBottomBar(BuildContext context) {
-    return CustomBottomBar(
-      onChanged: (BottomBarEnum type) {
-        final currentRoute = getCurrentRoute(type);
-        if (currentRoute == AppRoutes.homeScreenConsultantScreen) {
-          Navigator.pop(context);
-        } else {
-          Navigator.pushReplacementNamed(context, getCurrentRoute(type));
-        }
-      },
-    );
-  }
-
-  ///Handling route based on bottom click actions
   String getCurrentRoute(BottomBarEnum type) {
     switch (type) {
       case BottomBarEnum.Home:
@@ -217,16 +214,6 @@ class ConsultantProfileScreen extends StatelessWidget {
         return AppRoutes.consultantProfileScreen;
       default:
         return '/';
-    }
-  }
-
-  ///Handling page based on route
-  Widget getCurrentPage(String currentRoute) {
-    switch (currentRoute) {
-      case AppRoutes.consultantChatListPage:
-        return ConsultantChatListPage();
-      default:
-        return DefaultWidget();
     }
   }
 }
