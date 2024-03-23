@@ -153,6 +153,12 @@ class CustomTextStyles {
     fontSize: 18.fSize,
     fontWeight: FontWeight.w500,
   );
+  static get titleLargeBluegray90001Bold =>
+      theme.textTheme.titleLarge!.copyWith(
+        color: appTheme.blueGray90001,
+        fontSize: 22.fSize,
+        fontWeight: FontWeight.w700,
+      );
 }
 
 extension on TextStyle {

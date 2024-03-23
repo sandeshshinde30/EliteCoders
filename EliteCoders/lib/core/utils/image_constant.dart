@@ -70,4 +70,6 @@ class ImageConstant {
 
   static String imgUserBlueGray900 = '$imagePath/img_user_blue_gray_900.svg';
 
+  static String imgSignal = '$imagePath/img_signal.svg';
+
 }

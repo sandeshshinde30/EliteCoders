@@ -60,6 +60,14 @@ class AppDecoration {
       width: 2.h,
     ),
   );
+  static BoxDecoration get outlineBlueGray => BoxDecoration(
+    color: appTheme.blueGray100,
+    border: Border.all(
+      color: appTheme.blueGray90001,
+      width: 1.h,
+      strokeAlign: strokeAlignOutside,
+    ),
+  );
 }
 
 class BorderRadiusStyle {

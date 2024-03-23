@@ -86,7 +86,9 @@ class _HomeScreenConsulteeScreenState extends State<HomeScreenConsulteeScreen> {
                 ),
               ),
               SizedBox(height: 11.v),
-              _buildFortyOne(context),
+              // _buildFortyOne(context),
+
+              _buildOne(context),
               SizedBox(height: 38.v),
               Padding(
                 padding: EdgeInsets.only(
@@ -237,6 +239,43 @@ class _HomeScreenConsulteeScreenState extends State<HomeScreenConsulteeScreen> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOne(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        margin: EdgeInsets.only(left: 20.h, right: 20.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: 29.h,
+          vertical: 21.v,
+        ),
+        decoration: AppDecoration.outlineBlueGray.copyWith(
+          borderRadius: BorderRadiusStyle.roundedBorder20,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CustomImageView(
+              imagePath: ImageConstant.imgSignal,
+              width: 54.h,
+              margin: EdgeInsets.only(bottom: 1.v),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                top: 19.v,
+                right: 7.h,
+                bottom: 19.v,
+              ),
+              child: Text(
+                "Most Transparent \nPlatform",
+                style: CustomTextStyles.titleLargeBluegray90001Bold,
+              ),
+            ),
+          ],
         ),
       ),
     );
