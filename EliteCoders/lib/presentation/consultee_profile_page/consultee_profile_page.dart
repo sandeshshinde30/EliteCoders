@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:educonsult/widgets/app_bar/custom_app_bar.dart';
 import 'package:educonsult/widgets/custom_text_form_field.dart';
@@ -65,7 +66,7 @@ class _ConsulteeProfilePageState extends State<ConsulteeProfilePage> {
                         alignment: Alignment.center,
                         children: [
                           CustomImageView(
-                            imagePath: ImageConstant.imgEllipse12,
+                            imagePath: ImageConstant.imgPro,
                             height: 100.adaptSize,
                             width: 100.adaptSize,
                             radius: BorderRadius.circular(
@@ -124,7 +125,8 @@ class _ConsulteeProfilePageState extends State<ConsulteeProfilePage> {
                           bool? res = prefs.getBool("login");
                           if (res == false) {
                             print("log out Successful");
-                            Navigator.pushReplacementNamed(context, '/login_register_screen');
+                            //Navigator.pushReplacementNamed(context, '/login_register_screen');
+                            SystemNavigator.pop();
                             print("next");
                           }
                         },

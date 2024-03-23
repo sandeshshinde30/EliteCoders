@@ -7,20 +7,7 @@ class CustomButtonStyles {
   static ButtonStyle get fillOnPrimaryContainer => ElevatedButton.styleFrom(
         backgroundColor: theme.colorScheme.onPrimaryContainer,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(
-              26.h,
-            ),
-            topRight: Radius.circular(
-              26.h,
-            ),
-            bottomLeft: Radius.circular(
-              26.h,
-            ),
-            bottomRight: Radius.circular(
-              26.h,
-            ),
-          ),
+          borderRadius: BorderRadius.circular(10.h),
         ),
       );
   static ButtonStyle get fillPrimary => ElevatedButton.styleFrom(

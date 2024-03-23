@@ -30,6 +30,7 @@ class ImageConstant {
 
   // notification_screen images
   static String imgRectangle2 = '$imagePath/img_rectangle_2.png';
+  static String imgPro = '$imagePath/image_profile.png';
 
   // home_screen_consultee images
   static String imgRectangle262x63 = '$imagePath/img_rectangle_2_62x63.png';

@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import '../presentation/chat_screen/chat_screen.dart';
 import '../presentation/college_consultant_list_screen/college_consultant_list_screen.dart';
+import '../presentation/college_list_screen/college_list_loader.dart';
 import '../presentation/college_list_screen/college_list_screen.dart';
 import '../presentation/consultant_chat_list_container_screen/consultant_chat_list_container_screen.dart';
 import '../presentation/consultant_profile_screen/consultant_profile_screen.dart';
@@ -8,8 +10,12 @@ import '../presentation/consultee_chat_list_container_screen/consultee_chat_list
 import '../presentation/consultee_profile_container_screen/consultee_profile_container_screen.dart';
 import '../presentation/home_screen_consultant_screen/home_screen_consultant_screen.dart';
 import '../presentation/home_screen_consultee_screen/home_screen_consultee_screen.dart';
+import '../presentation/i_am_screen/i_am_screen.dart';
 import '../presentation/notification_screen/notification_screen.dart';
+import '../presentation/registration_screen_consultant_screen/registration_screen_consultant_screen.dart';
+import '../presentation/registration_screen_consultee_screen/registration_screen_consultee_screen.dart';
 import '../presentation/request_list_screen/request_list_screen.dart';
+import '../presentation/request_list_screen/request_loder.dart';
 import '../presentation/splash_screen/splash_screen.dart';
 import '../presentation/login_register_screen/login_register_screen.dart';
 import '../presentation/login_screen/login_screen.dart';
@@ -61,6 +67,20 @@ class AppRoutes {
   static const String homeScreenConsultantScreen =
       '/home_screen_consultant_screen';
 
+  static const String request_loader =
+      '/request_loader';
+
+  static const String college_list_loader =
+      '/college_list_loader';
+
+  static const String iAmScreen = '/i_am_screen';
+
+  static const String registrationScreenConsulteeScreen =
+      '/registration_screen_consultee_screen';
+
+  static const String registrationScreenConsultantScreen =
+      '/registration_screen_consultant_screen';
+
   static Map<String, WidgetBuilder> routes = {
     splashScreen: (context) => SplashScreen(),
     loginRegisterScreen: (context) => LoginRegisterScreen(),
@@ -81,5 +101,10 @@ class AppRoutes {
         ConsultantChatListContainerScreen(),
     consultantProfileScreen: (context) => ConsultantProfileScreen(),
     homeScreenConsultantScreen: (context) => HomeScreenConsultantScreen(),
+    request_loader : (context) => RequestLoader(),
+    college_list_loader : (context) => College_list_loader(),
+    iAmScreen: (context) => IAmScreen(),
+    registrationScreenConsulteeScreen: (context) => RegistrationScreenConsulteeScreen(),
+    registrationScreenConsultantScreen: (context) => RegistrationScreenConsultantScreen(),
   };
 }

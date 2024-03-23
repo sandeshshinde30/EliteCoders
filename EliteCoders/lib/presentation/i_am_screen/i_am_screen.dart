@@ -24,6 +24,9 @@ class IAmScreen extends StatelessWidget {
               ),
               SizedBox(height: 38.v),
               CustomElevatedButton(
+                onPressed: (){
+                  Navigator.pushNamed(context,'/registration_screen_consultant_screen');
+                },
                 text: "Consultant",
                 margin: EdgeInsets.only(left: 8.h),
                 buttonStyle: CustomButtonStyles.fillPrimaryContainer,
@@ -31,6 +34,9 @@ class IAmScreen extends StatelessWidget {
               ),
               SizedBox(height: 54.v),
               CustomElevatedButton(
+                onPressed: (){
+                  Navigator.pushNamed(context,'/registration_screen_consultee_screen');
+                },
                 text: "Consultee",
                 margin: EdgeInsets.only(left: 8.h),
                 buttonStyle: CustomButtonStyles.fillOnPrimaryContainer,

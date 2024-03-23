@@ -69,7 +69,7 @@ class ConsultantProfileScreen extends StatelessWidget {
                           alignment: Alignment.center,
                           children: [
                             CustomImageView(
-                              imagePath: ImageConstant.imgEllipse12,
+                              imagePath: ImageConstant.imgPro,
                               height: 100.adaptSize,
                               width: 100.adaptSize,
                               radius: BorderRadius.circular(

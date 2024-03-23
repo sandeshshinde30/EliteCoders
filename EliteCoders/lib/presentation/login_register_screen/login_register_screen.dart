@@ -81,7 +81,7 @@ class LoginRegisterScreen extends StatelessWidget {
             buttonTextStyle: TextStyle(color: Colors.white,fontSize: 15.h),
           ),
           CustomElevatedButton(
-            onPressed: (){Navigator.pushNamed(context, '/registration_screen');},
+            onPressed: (){Navigator.pushNamed(context, '/i_am_screen');},
             width: 120.h,
             height: 45.h,
             text: "Register",

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-// import 'package:educonsult/core/app_export.dart';
+import 'package:educonsult/core/app_export.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -32,7 +32,8 @@ class _SplashScreenState extends State<SplashScreen> {
     name = prefCheckLogin.getString("name");
     designation = prefCheckLogin.getString("designation");
 
-    if(loginOrNot == null)
+
+    if(loginOrNot == null || loginOrNot == "")
     {
       Timer(Duration(seconds:2),()=>Navigator.pushNamed(context,'/login_register_screen'));
 
