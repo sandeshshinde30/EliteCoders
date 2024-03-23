@@ -3,7 +3,7 @@ import 'package:educonsult/core/app_export.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../widgets/custom_bottom_bar.dart';
+import '../../widgets/custom_bottom_bar_consultant.dart';
 import '../../widgets/custom_drop_down.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_form_field.dart';
