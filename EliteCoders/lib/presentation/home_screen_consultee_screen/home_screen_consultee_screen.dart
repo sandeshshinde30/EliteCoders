@@ -99,7 +99,7 @@ class _HomeScreenConsulteeScreenState extends State<HomeScreenConsulteeScreen> {
                   children: [
                     CustomElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/college_list_screen');
+                        Navigator.pushNamed(context, '/college_list_loader');
                       },
                       width: 134.h,
                       text: "Colleges",
