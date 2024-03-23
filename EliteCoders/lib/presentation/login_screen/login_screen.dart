@@ -121,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: EdgeInsets.only(right: 0.h),
                     child: InkWell(
                       onTap: () {
-                        Navigator.pushReplacementNamed(context, '/registration_screen');
+                        Navigator.pushReplacementNamed(context, '/i_am_screen');
                       },
                       child: Text(
                         "Create new account",

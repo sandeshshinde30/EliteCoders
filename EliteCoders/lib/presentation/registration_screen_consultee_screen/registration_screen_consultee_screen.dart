@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:educonsult/core/app_export.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_form_field.dart';
@@ -22,6 +23,19 @@ class _RegistrationScreenConsulteeScreenState
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmpasswordController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  late SharedPreferences prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    initializePreferences();
+  }
+
+  Future<void> initializePreferences() async {
+    prefs  = await SharedPreferences.getInstance();
+  }
+
 
   bool checkRegistrationFieldsnotEmpty() {
     if (nameController.text.toString().isEmpty) {
@@ -46,7 +60,7 @@ class _RegistrationScreenConsulteeScreenState
   Future<void> Register() async
   {
     try{
-      var url = Uri.parse("http://192.168.52.145/EduConsult_API/upload_consultant_reg_details.php");
+      var url = Uri.parse("http://192.168.52.145/EduConsult_API/upload_consultee_reg_details.php");
 
       print(nameController.text.toString());
       print(emailController.text.toString());
@@ -67,19 +81,46 @@ class _RegistrationScreenConsulteeScreenState
         if (res.containsKey("error")) {
           // Handle error
           print("Error: ${res["error"]}");
-          // RegistrationSuccessalert("Error while Registration, Please try again..");
+          alert("Error while Registration, Please try again..");
 
         } else if (res.containsKey("message")) {
-          // Handle success
+
+          prefs.setString("name",nameController.text.toString());
+          prefs.setString("designation", res['designation']);
+          prefs.setBool("login", true);
+
           print("Success: ${res["message"]}");
-          // RegistrationSuccessalert("Registration Successfull");
+          print(res['designation']);
+          RegSuccessalert("Registration Successfull",res['designation']);
 
         }
       }
-
     }
     catch(e){print(e);
     }
+  }
+
+  void RegSuccessalert(String content , String designation) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Alert'),
+          content: Text('$content'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                if(designation == "consultee") Navigator.pushReplacementNamed(context, '/home_screen_consultee_screen' );
+                else Navigator.pushReplacementNamed(context, '/home_screen_consultant_screen');
+              },
+
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void alert(String content) {
@@ -101,6 +142,8 @@ class _RegistrationScreenConsulteeScreenState
       },
     );
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -153,9 +196,14 @@ class _RegistrationScreenConsulteeScreenState
                       alignment: Alignment.centerRight,
                       child: Padding(
                         padding: EdgeInsets.only(right: 41.h),
-                        child: Text(
-                          "Already have an account",
-                          style: CustomTextStyles.titleMediumOnPrimary,
+                        child: InkWell(
+                          onTap: (){
+                            Navigator.pushNamed(context, '/login_screen');
+                          },
+                          child: Text(
+                            "Already have an account",
+                            style: CustomTextStyles.titleMediumOnPrimary,
+                          ),
                         ),
                       ),
                     ),
@@ -175,7 +223,7 @@ class _RegistrationScreenConsulteeScreenState
                               bottom: 11.v,
                             ),
                             child: SizedBox(
-                              width: 89.h,
+                              width: 70.h,
                               child: Divider(),
                             ),
                           ),
@@ -192,7 +240,7 @@ class _RegistrationScreenConsulteeScreenState
                               bottom: 11.v,
                             ),
                             child: SizedBox(
-                              width: 94.h,
+                              width: 70.h,
                               child: Divider(
                                 indent: 5.h,
                               ),
@@ -345,7 +393,9 @@ class _RegistrationScreenConsulteeScreenState
   Widget _buildSignUp(BuildContext context) {
     return CustomElevatedButton(
       onPressed: (){
-        checkRegistrationFieldsnotEmpty();
+       bool res = checkRegistrationFieldsnotEmpty();
+        if(res) Register();
+        else print("problem");
       },
       height: 50.v,
       text: "Sign up",

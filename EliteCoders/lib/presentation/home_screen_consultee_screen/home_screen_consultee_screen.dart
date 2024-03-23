@@ -16,7 +16,7 @@ class _HomeScreenConsulteeScreenState extends State<HomeScreenConsulteeScreen> {
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
   late SharedPreferences prefCheckLogin;
-  var name;
+  var name = "";
 
   @override
   void initState() {
