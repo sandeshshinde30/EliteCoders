@@ -31,7 +31,7 @@ class ConsulteeProfileContainerScreen extends StatelessWidget {
         // if (currentContext != null) {
         final currentRoute = getCurrentRoute(type);
         if (currentRoute == AppRoutes.homeScreenConsulteeScreen) {
-          Navigator.pop(context);
+          Navigator.pushReplacement(context, '/home_screen_consultant_screen' as Route<Object?>);
         } else {
           Navigator.pushReplacementNamed(context, getCurrentRoute(type));
         }

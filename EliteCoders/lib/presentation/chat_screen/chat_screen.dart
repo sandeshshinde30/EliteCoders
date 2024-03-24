@@ -56,7 +56,7 @@ class _ChatScreenState extends State<ChatScreen> {
      consultant_name = prefCheckLogin.getString("name")!;
      designation = prefCheckLogin.getString("designation")!;
 
-     // getChat(context);
+     getChat(context,consultee_name);
    }
 
    Future<void> getChat(BuildContext context,String consultee_name) async
@@ -71,28 +71,37 @@ class _ChatScreenState extends State<ChatScreen> {
 
 
        if (response.body.isNotEmpty) {
-         msg = (jsonDecode(response.body) as List<dynamic>).cast<Map<dynamic, dynamic>>();
+         // msg = (jsonDecode(response.body) as List<dynamic>).cast<Map<dynamic, dynamic>>();
 
-         if(msg != Null)
-         {
-           print(msg);
-           setState(() {
-             Timer? _timer;
+         var decodedBody = jsonDecode(response.body);
 
-             void startTimer() {
-               // Create a timer that calls a method every 5 seconds
-               _timer = Timer.periodic(Duration(seconds: 5), (timer) {
-                 // Call your method here
-                 getChat(context,consultee_name);
-               });
-               startTimer();
-             }
-           });
+         msg = decodedBody.cast<Map<dynamic, dynamic>>();
+
+         if (decodedBody is List<dynamic>) {
+
+           if (msg != Null) {
+             print(msg);
+             setState(() {
+               Timer? _timer;
+
+               void startTimer() {
+                 // Create a timer that calls a method every 5 seconds
+                 _timer = Timer.periodic(Duration(seconds: 5), (timer) {
+                   // Call your method here
+                   getChat(context, consultee_name);
+                 });
+                 startTimer();
+               }
+             });
+           }
+           else {
+
+           }
          }
          else
-         {
-
-         }
+           {
+             print("cant");
+           }
        }
      } catch (e) {
        print("Fetch Consultants Error: $e");
