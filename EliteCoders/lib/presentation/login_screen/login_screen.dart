@@ -106,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         print(emailController.text.toString());
                         print(passwordController.text.toString());
                         showDialog(context: context, builder: (context) => Center(child: CircularProgressIndicator(color: Color(0xFF169BD7),)));
-                        checkUserRegistered(context);
+                        checkUserRegistered(context,emailController.text.toString(),passwordController.text.toString());
                       }
                   },
                   height: 50.v,
@@ -162,42 +162,45 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-
 // Login API Calling function
-  Future checkUserRegistered(BuildContext context) async {
+  Future<void> checkUserRegistered(BuildContext context,String uname,String pass) async {
     try {
       var url = Uri.parse("http://192.168.52.145/EduConsult_API/login.php");
 
       var response = await http.post(url, body: {
-        'Username': emailController.text.toString(),
-        'Password': passwordController.text.toString()
+        'Username': uname,
+        'Password': pass
       });
 
-      Map Data;
+      print("hii");
+
       if (response.body.isNotEmpty) {
-        Data = jsonDecode(response.body);
+        var data = jsonDecode(response.body);
 
-        // Data = "false";
-        if (Data['result'] == "true") {
-          Navigator.of(context).pop();
+        print(data);
 
-          // If login success then storing name
 
-          prefs.setString("username", Data['Username']);
-          prefs.setString("designation", Data['designation']);
-          prefs.setBool("login", true);
+        if (data['result'] == "true") {
+            Navigator.of(context).pop();
+            print("hello");
 
-          if(Data['designation'] == "consultee") Navigator.pushReplacementNamed(context, '/home_screen_consultee_screen',arguments: Data['name'] );
-          else Navigator.pushReplacementNamed(context, '/home_screen_consultant_screen',arguments: Data['name']);
-        }
-        else {
-          Navigator.of(context).pop();
-          showDialog(
+            prefs.setString("name", data['name'].toString());
+            prefs.setString("designation", data['designation'].toString());
+            prefs.setBool("login", true);
+
+            if (data['designation'] == "consultee") {
+              Navigator.pushReplacementNamed(context, '/home_screen_consultee_screen', arguments: data['name']);
+            } else {
+              Navigator.pushReplacementNamed(context, '/home_screen_consultant_screen', arguments: data['name']);
+            }
+          } else {
+            Navigator.of(context).pop();
+            showDialog(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: Text('Error'),
-                  content: Text("Invalid Login",),
+                  content: Text("Invalid Login"),
                   actions: <Widget>[
                     TextButton(
                       child: Text('OK'),
@@ -207,16 +210,37 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 );
-              }
-          );
+              },
+            );
+          }
         }
-      }
+          else {
+            Navigator.of(context).pop();
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Error'),
+                  content: Text("Invalid Login"),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text('OK'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          }
     }
-    catch(e) {
+    catch (e) {
       Navigator.of(context).pop();
-      print("Login Error");
-      print(e);
+      print("Login Error: $e");
     }
   }
+
+
 }
 

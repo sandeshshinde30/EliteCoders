@@ -77,7 +77,7 @@ class _ConsultantChatListPageState extends State<ConsultantChatListPage> {
 
   @override
   Widget build(BuildContext context) {
-    data = [...?ModalRoute.of(context)?.settings.arguments as List? ?? []];
+    data = [...ModalRoute.of(context)?.settings.arguments as List? ?? []];
     if (data == null || data!.isEmpty) {
       // Timer(Duration(seconds:1),()=>Navigator.pushReplacementNamed(context,'/home_screen_consultant_screen'));
       return Scaffold(
@@ -169,7 +169,7 @@ class _ConsultantChatListPageState extends State<ConsultantChatListPage> {
       case BottomBarEnum.Requests:
         return AppRoutes.request_loader;
       case BottomBarEnum.Chat:
-        return AppRoutes.consultantChatListContainerScreen;
+        return AppRoutes.consultantChatLoader;
       case BottomBarEnum.Profile:
         return AppRoutes.consultantProfileScreen;
       default:

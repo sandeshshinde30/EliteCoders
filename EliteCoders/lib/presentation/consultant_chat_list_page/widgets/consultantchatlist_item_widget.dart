@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:educonsult/core/app_export.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ConsultantchatlistItemWidget extends StatelessWidget {
+class ConsultantchatlistItemWidget extends StatefulWidget {
   final int index;
   final List data;
 
@@ -12,70 +13,74 @@ class ConsultantchatlistItemWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    var name = data[index]['consulteeName'] ?? '';
+  _ConsultantchatlistItemWidgetState createState() =>
+      _ConsultantchatlistItemWidgetState();
+}
 
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15),
-      padding: EdgeInsets.all(7),
-      decoration: AppDecoration.outlinePrimaryContainer.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder14,
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CustomImageView(
-            imagePath: ImageConstant.imgEllipse12,
-            height: 55.adaptSize,
-            width: 55.adaptSize,
-            radius: BorderRadius.circular(25),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: 11.h,
-              top: 11.v,
-              bottom: 15.v,
+class _ConsultantchatlistItemWidgetState
+    extends State<ConsultantchatlistItemWidget> {
+  late SharedPreferences prefCheckLogin;
+  var designation;
+  late String type = ''; // Initialize type here
+
+  @override
+  void initState() {
+    super.initState();
+    initializePreferences();
+  }
+
+  Future<void> initializePreferences() async {
+    prefCheckLogin = await SharedPreferences.getInstance();
+    designation = prefCheckLogin.getString("designation")!;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (designation == "consultee") {
+      type = "consultantName";
+    } else {
+      type = "consulteeName";
+    }
+    print(type);
+    var name = widget.data[widget.index]['$type'] ?? ''; // Access data using widget
+
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, '/chat_screen', arguments: name);
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 15),
+        padding: EdgeInsets.all(7),
+        decoration: AppDecoration.outlinePrimaryContainer.copyWith(
+          borderRadius: BorderRadiusStyle.roundedBorder14,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomImageView(
+              imagePath: ImageConstant.imgEllipse12,
+              height: 55.adaptSize,
+              width: 55.adaptSize,
+              radius: BorderRadius.circular(25),
             ),
-            child: Text(
-              "$name",
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
+            Padding(
+              padding: EdgeInsets.only(
+                left: 11.h,
+                top: 11.v,
+                bottom: 15.v,
+              ),
+              child: Text(
+                "$name",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               ),
             ),
-          ),
-          Spacer(),
-          Padding(
-            padding: EdgeInsets.only(
-              right: 7.h,
-              bottom: 9.v,
-            ),
-            child: Column(
-              children: [
-                Text(
-                  "15.29",
-                  style: TextStyle(color: Colors.black, fontSize: 15),
-                ),
-                SizedBox(height: 1.v),
-                Container(
-                  width: 23.adaptSize,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 6.h,
-                    vertical: 1.v,
-                  ),
-                  decoration: AppDecoration.fillPrimaryContainer.copyWith(
-                    borderRadius: BorderRadiusStyle.roundedBorder11,
-                  ),
-                  child: Text(
-                    "2",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+            Spacer(),
+          ],
+        ),
       ),
     );
   }

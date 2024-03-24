@@ -16,7 +16,7 @@ class _HomeScreenConsulteeScreenState extends State<HomeScreenConsulteeScreen> {
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
   late SharedPreferences prefCheckLogin;
-  var name = "";
+  var name;
 
   @override
   void initState() {
@@ -25,11 +25,13 @@ class _HomeScreenConsulteeScreenState extends State<HomeScreenConsulteeScreen> {
   }
 
   Future<void> initializePreferences() async {
-    prefCheckLogin  = await SharedPreferences.getInstance();
+    prefCheckLogin = await SharedPreferences.getInstance();
+    String? n = prefCheckLogin.getString("name");
+        print(n);
     setState(() {
-      name = prefCheckLogin.getString("name")!;
+      name =  n!;
     });
-  }
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -309,7 +311,7 @@ class _HomeScreenConsulteeScreenState extends State<HomeScreenConsulteeScreen> {
       case BottomBarEnum.College:
         return AppRoutes.college_list_loader;
       case BottomBarEnum.Chat:
-        return AppRoutes.consulteeChatListContainerScreen;
+        return AppRoutes.consultantChatLoader;
       case BottomBarEnum.Profile:
         return AppRoutes.consulteeProfileContainerScreen;
       default:

@@ -38,6 +38,7 @@ class _HomeScreenConsultantScreenState
     if (name != null) {
       setState(() {
         consultant_name = name;
+        print(consultant_name);
       });
     }
   }
