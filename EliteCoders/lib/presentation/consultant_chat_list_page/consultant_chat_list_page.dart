@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:educonsult/widgets/custom_search_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../widgets/custom_bottom_bar.dart';
+import '../../widgets/custom_bottom_bar_consultant.dart';
 import 'widgets/consultantchatlist_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:educonsult/core/app_export.dart';
@@ -153,7 +153,7 @@ class _ConsultantChatListPageState extends State<ConsultantChatListPage> {
       onChanged: (BottomBarEnum type) {
         final currentRoute = getCurrentRoute(type);
         if (currentRoute == AppRoutes.homeScreenConsultantScreen) {
-          Navigator.pop(context);
+          Navigator.pushReplacementNamed(context, '/home_screen_consultant_screen');
         } else {
           Navigator.pushReplacementNamed(context, getCurrentRoute(type));
         }

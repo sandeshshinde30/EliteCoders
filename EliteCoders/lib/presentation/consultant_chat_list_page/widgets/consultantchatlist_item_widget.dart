@@ -32,6 +32,9 @@ class _ConsultantchatlistItemWidgetState
   Future<void> initializePreferences() async {
     prefCheckLogin = await SharedPreferences.getInstance();
     designation = prefCheckLogin.getString("designation")!;
+    setState(() {
+
+    });
   }
 
   @override

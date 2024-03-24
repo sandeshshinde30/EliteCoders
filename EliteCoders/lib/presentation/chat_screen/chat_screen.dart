@@ -184,7 +184,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         itemBuilder: (context, index) {
                           String des = msg[index]['designation'];
                           // If number is even, display 'Even', else display 'Odd'
-                          return des != "consultant"
+                          return des == "consultant"
                               ? Align(
                             alignment: Alignment.centerRight,
                             child: Container(
