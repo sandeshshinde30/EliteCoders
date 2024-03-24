@@ -109,7 +109,7 @@ class _CollegeListScreenState extends State<CollegeListScreen> {
       case BottomBarEnum.College:
         return AppRoutes.college_list_loader;
       case BottomBarEnum.Chat:
-        return AppRoutes.consulteeChatListContainerScreen;
+        return AppRoutes.consultantChatLoader;//consultee_chat_list_container_screen
       case BottomBarEnum.Profile:
         return AppRoutes.consulteeProfileContainerScreen;
       default:
