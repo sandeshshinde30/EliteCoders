@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../core/database_ip.dart';
+
 
 class RequestLoader extends StatefulWidget {
   const RequestLoader({Key? key}) : super(key: key);
@@ -46,7 +48,9 @@ class _RequestLoaderState extends State<RequestLoader> {
   Future<void> fetchRequest(BuildContext context) async
   {
     try {
-      var url = Uri.parse("http://192.168.52.145/Educonsult_API/see_requests.php");
+      DB_IP a = DB_IP();
+      String ip = a.getIpAddr();
+      var url = Uri.parse("http://$ip/Educonsult_API/see_requests.php");
 
       var response = await http.post(url, body: {
         'ConsultantName': consultant_name, // Assuming '6007' is the hardcoded college ID

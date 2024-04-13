@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:educonsult/widgets/custom_search_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../core/database_ip.dart';
 import '../../widgets/custom_bottom_bar_consultant.dart';
 import 'widgets/consultantchatlist_item_widget.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,9 @@ class _ConsultantChatListPageState extends State<ConsultantChatListPage> {
   // Future<void> getChatData(String name, String designation) async {
   //
   //   try {
-  //     var url = Uri.parse("http://192.168.52.145/Educonsult_API/see_chat_list.php");
+  // DB_IP a = DB_IP();
+  // String ip = a.getIpAddr();
+  //     var url = Uri.parse("http://$ip/Educonsult_API/see_chat_list.php");
   //
   //     var response = await http.post(url, body: {
   //       'name': consultant_name,

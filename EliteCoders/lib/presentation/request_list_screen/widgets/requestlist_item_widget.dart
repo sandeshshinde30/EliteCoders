@@ -6,6 +6,8 @@ import 'package:educonsult/core/app_export.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../core/database_ip.dart';
+
 
 class RequestlistItemWidget extends StatefulWidget {
   final int index;
@@ -146,7 +148,9 @@ class _RequestlistItemWidgetState extends State<RequestlistItemWidget> {
   Future<void> fetchRequest(BuildContext context,String status) async {
     var data;
     try {
-      var url = Uri.parse("http://192.168.52.145/Educonsult_API/accept_reject_request.php");
+      DB_IP a = DB_IP();
+      String ip = a.getIpAddr();
+      var url = Uri.parse("http://$ip/Educonsult_API/accept_reject_request.php");
 
       var response = await http.post(url, body: {
         'ConsultantName': consultant_name,

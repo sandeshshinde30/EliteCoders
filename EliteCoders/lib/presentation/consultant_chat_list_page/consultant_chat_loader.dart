@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../core/database_ip.dart';
+
 
 class consultant_chat_loader extends StatefulWidget {
   const consultant_chat_loader({super.key});
@@ -51,7 +53,9 @@ class _consultant_chat_loaderState extends State<consultant_chat_loader> {
   Future<void> getChatData(String name, String designation) async {
 
     try {
-      var url = Uri.parse("http://192.168.52.145/Educonsult_API/see_chat_list.php");
+      DB_IP a = DB_IP();
+      String ip = a.getIpAddr();
+      var url = Uri.parse("http://$ip/Educonsult_API/see_chat_list.php");
 
       var response = await http.post(url, body: {
         'name': consultant_name,

@@ -16,6 +16,8 @@ import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+import '../../core/database_ip.dart';
+
 
 // ignore_for_file: must_be_immutable
 class ChatScreen extends StatefulWidget {
@@ -62,7 +64,9 @@ class _ChatScreenState extends State<ChatScreen> {
    Future<void> getChat(BuildContext context,String consultee_name) async
    {
      try {
-       var url = Uri.parse("http://192.168.52.145/Educonsult_API/get_chat.php");
+       DB_IP a = DB_IP();
+       String ip = a.getIpAddr();
+       var url = Uri.parse("http://$ip/Educonsult_API/get_chat.php");
 
        var response = await http.post(url, body: {
          'ConsultantName': consultant_name,

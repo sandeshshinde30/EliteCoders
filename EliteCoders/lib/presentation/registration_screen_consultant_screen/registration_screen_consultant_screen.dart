@@ -6,6 +6,7 @@ import 'package:educonsult/widgets/custom_drop_down.dart';
 import 'package:educonsult/widgets/custom_text_form_field.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import '../../core/database_ip.dart';
 import '../../widgets/custom_elevated_button.dart';
 
 class RegistrationScreenConsultantScreen extends StatefulWidget {
@@ -156,7 +157,9 @@ class _RegistrationScreenConsultantScreenState
   Future<void> uploadImage() async
   {
     try{
-      var url = Uri.parse("http://192.168.52.145/EduConsult_API/upload_consultant_reg_details.php");
+      DB_IP a = DB_IP();
+      String ip = a.getIpAddr();
+      var url = Uri.parse("http://$ip/EduConsult_API/upload_consultant_reg_details.php");
 
       print(nameController.text.toString());
       print(emailController.text.toString());

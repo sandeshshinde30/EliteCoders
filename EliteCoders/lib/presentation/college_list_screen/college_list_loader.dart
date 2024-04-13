@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../core/database_ip.dart';
+
 
 class College_list_loader extends StatefulWidget {
   const College_list_loader({Key? key}) : super(key: key);
@@ -33,7 +35,9 @@ class _College_list_loaderState extends State<College_list_loader> {
   Future<void> fetchCollegeList(BuildContext context) async
   {
     try {
-      var url = Uri.parse("http://192.168.52.145/Educonsult_API/list_colleges.php");
+      DB_IP a = DB_IP();
+      String ip = a.getIpAddr();
+      var url = Uri.parse("http://$ip/Educonsult_API/list_colleges.php");
 
       var response = await http.get(url);
 

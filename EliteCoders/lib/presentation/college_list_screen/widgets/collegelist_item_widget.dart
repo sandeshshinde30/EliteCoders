@@ -4,6 +4,8 @@ import 'package:educonsult/presentation/college_consultant_list_screen/college_c
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../core/database_ip.dart';
+
 class CollegelistItemWidget extends StatelessWidget {
   final int index;
   final List? data;
@@ -66,7 +68,9 @@ class CollegelistItemWidget extends StatelessWidget {
 
   Future<void> fetchConsultants(BuildContext context, String collegeID) async {
     try {
-      var url = Uri.parse("http://192.168.52.145/Educonsult_API/fetch_consultants.php");
+      DB_IP a = DB_IP();
+      String ip = a.getIpAddr();
+      var url = Uri.parse("http://$ip/Educonsult_API/fetch_consultants.php");
 
       var response = await http.post(url, body: {
         'CollegeID': collegeID,

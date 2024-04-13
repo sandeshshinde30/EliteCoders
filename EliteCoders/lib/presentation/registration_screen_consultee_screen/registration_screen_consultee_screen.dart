@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:educonsult/core/app_export.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../core/database_ip.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_form_field.dart';
 import 'package:http/http.dart' as http;
@@ -59,7 +60,9 @@ class _RegistrationScreenConsulteeScreenState
   Future<void> Register() async
   {
     try{
-      var url = Uri.parse("http://192.168.52.145/EduConsult_API/upload_consultee_reg_details.php");
+      DB_IP a = DB_IP();
+      String ip = a.getIpAddr();
+      var url = Uri.parse("http://$ip/EduConsult_API/upload_consultee_reg_details.php");
 
       print(nameController.text.toString());
       print(emailController.text.toString());
