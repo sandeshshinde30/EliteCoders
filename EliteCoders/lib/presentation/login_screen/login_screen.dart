@@ -4,6 +4,7 @@ import 'package:educonsult/widgets/custom_text_form_field.dart';
 import 'package:educonsult/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:educonsult/core/app_export.dart';
+import 'package:educonsult/core/database_ip.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -165,7 +166,9 @@ class _LoginScreenState extends State<LoginScreen> {
 // Login API Calling function
   Future<void> checkUserRegistered(BuildContext context,String uname,String pass) async {
     try {
-      var url = Uri.parse("http://192.168.52.145/EduConsult_API/login.php");
+      DB_IP a = DB_IP();
+      String ip = a.getIpAddr();
+      var url = Uri.parse("http://$ip/EduConsult_API/login.php");
 
       var response = await http.post(url, body: {
         'Username': uname,
