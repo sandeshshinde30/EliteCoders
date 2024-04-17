@@ -68,7 +68,7 @@ class _consulteeChatLoaderState extends State<consulteeChatLoader> {
         if(data != Null)
         {
           print(data);
-          Navigator.pushReplacementNamed(context, '/consultant_chat_list_page',arguments: data);
+          Navigator.pushReplacementNamed(context, '/consultee_chat_list_page',arguments: data);
         }
         else
         {
