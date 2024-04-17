@@ -1,4 +1,5 @@
 import 'package:educonsult/widgets/custom_search_view.dart';
+import '../../widgets/custom_bottom_bar.dart';
 import 'widgets/consulteechatlist_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:educonsult/core/app_export.dart';
@@ -56,6 +57,7 @@ class ConsulteeChatListPage extends StatelessWidget {
             ],
           ),
         ),
+        bottomNavigationBar: _buildBottomBar(context),
       ),
     );
   }
@@ -85,5 +87,44 @@ class ConsulteeChatListPage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Widget _buildBottomBar(BuildContext context) {
+    return CustomBottomBar(
+      onChanged: (BottomBarEnum type) {
+        final currentRoute = getCurrentRoute(type);
+        if (currentRoute == AppRoutes.homeScreenConsultantScreen) {
+          Navigator.pushReplacementNamed(context, '/home_screen_consultee_screen');
+        } else {
+          Navigator.pushReplacementNamed(context, getCurrentRoute(type));
+        }
+      },
+    );
+  }
+
+  ///Handling route based on bottom click actions
+  String getCurrentRoute(BottomBarEnum type) {
+    switch (type) {
+      case BottomBarEnum.Home:
+        return AppRoutes.homeScreenConsulteeScreen;
+      case BottomBarEnum.Requests:
+        return AppRoutes.college_list_loader;
+      case BottomBarEnum.Chat:
+        return AppRoutes.consulteechatLoader;
+      case BottomBarEnum.Profile:
+        return AppRoutes.consulteeProfilePage;
+      default:
+        return '/';
+    }
+  }
+
+  ///Handling page based on route
+  Widget getCurrentPage(String currentRoute) {
+    switch (currentRoute) {
+      case AppRoutes.consultantChatListPage:
+        return ConsulteeChatListPage();
+      default:
+        return DefaultWidget();
+    }
   }
 }
