@@ -139,8 +139,7 @@ class _HomeScreenConsultantScreenState
                     ),
                     CustomElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(
-                            context, '/consultant_chat_list_container_screen');
+                        Navigator.pushNamed(context, '/consultantChatLoader');
                       },
                       width: 134.h,
                       text: "Chats",
