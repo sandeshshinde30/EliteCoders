@@ -44,14 +44,13 @@ class ConsulteeChatListPage extends StatelessWidget {
                 padding: EdgeInsets.only(
                   left: 20.h,
                   right: 20.h,
-                  top: 40.h
+                  top: 30.h
                 ),
                 child: CustomSearchView(
                   controller: searchController,
                   hintText: "Search Chat",
                 ),
               ),
-              SizedBox(height: 25.v),
               SizedBox(height: 21.v),
               _buildConsulteechatlist(context),
             ],

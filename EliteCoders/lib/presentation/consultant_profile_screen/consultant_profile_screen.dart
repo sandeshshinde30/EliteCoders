@@ -164,10 +164,18 @@ class _ConsultantProfileScreenState extends State<ConsultantProfileScreen> {
                       style: theme.textTheme.titleMedium,
                     ),
                     SizedBox(height: 3.v),
-                    CustomDropDown(
-                      hintText: "$year",
-                      items: dropdownItemList,
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      color: appTheme.blue50, // Set the fill color
+                      borderRadius: BorderRadius.circular(5.h), // Set the border radius
                     ),
+                    padding: EdgeInsets.all(18.h), // Set the content padding
+                    child: Text(
+                      "$year",
+                      style: theme.textTheme.titleSmall, // Set the text style
+                    ),
+                  ),
                     SizedBox(height: 36.v),
                     Center(
                       child: SizedBox(
@@ -187,13 +195,13 @@ class _ConsultantProfileScreenState extends State<ConsultantProfileScreen> {
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
-                              Color(0xffd7e5fd),
+                              Color(0xff172452),
                             ),
                           ),
                           child: Text(
                             'Log Out',
                             style: TextStyle(
-                              color: Color(0xff172452),
+                              color: Colors.white,
                               fontSize: 18,
                             ),
                           ),
@@ -222,36 +230,62 @@ class _ConsultantProfileScreenState extends State<ConsultantProfileScreen> {
   }
 
   Widget _buildName(BuildContext context) {
-    return CustomTextFormField(
-      controller: nameController,
-      hintText: "$username",
-      autofocus: false,
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: appTheme.blue50, // Set the fill color
+        borderRadius: BorderRadius.circular(5.h), // Set the border radius
+      ),
+      padding: EdgeInsets.all(18.h), // Set the content padding
+      child: Text(
+        "$username",
+        style: theme.textTheme.titleSmall, // Set the text style
+      ),
     );
   }
 
   Widget _buildEmail(BuildContext context) {
-    return CustomTextFormField(
-      controller: emailController,
-      hintText: "$email",
-      textInputType: TextInputType.emailAddress,
-      autofocus: false,
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: appTheme.blue50, // Set the fill color
+        borderRadius: BorderRadius.circular(5.h), // Set the border radius
+      ),
+      padding: EdgeInsets.all(18.h), // Set the content padding
+      child: Text(
+        "$email",
+        style: theme.textTheme.titleSmall, // Set the text style
+      ),
     );
   }
 
   Widget _buildTwentyTwo(BuildContext context) {
-    return CustomTextFormField(
-      controller: twentyTwoController,
-      hintText: "$college",
-      autofocus: false,
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: appTheme.blue50, // Set the fill color
+        borderRadius: BorderRadius.circular(5.h), // Set the border radius
+      ),
+      padding: EdgeInsets.all(18.h), // Set the content padding
+      child: Text(
+        "$college",
+        style: theme.textTheme.titleSmall, // Set the text style
+      ),
     );
   }
 
   Widget _buildTwentyTwo1(BuildContext context) {
-    return CustomTextFormField(
-      controller: twentyTwoController1,
-      hintText: "$branch",
-      textInputAction: TextInputAction.done,
-      autofocus: false,
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: appTheme.blue50, // Set the fill color
+        borderRadius: BorderRadius.circular(5.h), // Set the border radius
+      ),
+      padding: EdgeInsets.all(18.h), // Set the content padding
+      child: Text(
+        "$branch",
+        style: theme.textTheme.titleSmall, // Set the text style
+      ),
     );
   }
 

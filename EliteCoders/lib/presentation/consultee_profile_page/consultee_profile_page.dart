@@ -128,24 +128,36 @@ class _ConsulteeProfilePageState extends State<ConsulteeProfilePage> {
                     style: CustomTextStyles.titleMediumInter,
                   ),
                   SizedBox(height: 3.v),
-                  CustomTextFormField(
-                    autofocus: false,
-                    controller: nameController,
-                    hintText: "$name",
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: appTheme.blue50, // Set the fill color
+                    borderRadius: BorderRadius.circular(5.h), // Set the border radius
                   ),
+                  padding: EdgeInsets.all(18.h), // Set the content padding
+                  child: Text(
+                    "$name",
+                    style: theme.textTheme.titleSmall, // Set the text style
+                  ),
+                ),
                   SizedBox(height: 11.v),
                   Text(
                     "Email",
                     style: CustomTextStyles.titleMediumInter,
                   ),
                   SizedBox(height: 4.v),
-                  CustomTextFormField(
-                    autofocus: false,
-                    controller: emailController,
-                    hintText: "$email",
-                    textInputAction: TextInputAction.done,
-                    textInputType: TextInputType.emailAddress,
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: appTheme.blue50, // Set the fill color
+                    borderRadius: BorderRadius.circular(5.h), // Set the border radius
                   ),
+                  padding: EdgeInsets.all(18.h), // Set the content padding
+                  child: Text(
+                    "$email",
+                    style: theme.textTheme.titleSmall, // Set the text style
+                  ),
+                ),
                   SizedBox(height: 50.v),
 
                   SizedBox(height: 30.v),
