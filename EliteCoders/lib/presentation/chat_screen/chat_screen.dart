@@ -35,11 +35,11 @@ class _ChatScreenState extends State<ChatScreen> {
 
 
   // List<Map> msg = [
-  // {'msg': "Hii", 'designation': "Consultant"},
-  // {'msg': "Hello", 'designation': "Consultant"},
-  // {'msg': "Hii", 'designation': "Consultee"},
-  // {'msg': "I am Sandesh", 'designation': "Consultant"},
-  // {'msg': "I am Mahemud", 'designation': "Consultee"}
+  // {'msg': "Hii", 'designation': "consultant"},
+  // {'msg': "Hello", 'designation': "consultant"},
+  // {'msg': "Hii", 'designation': "consultee"},
+  // {'msg': "I am Sandesh", 'designation': "consultant"},
+  // {'msg': "I am Mahemud", 'designation': "consultee"}
   // ];
 
    late List<Map<dynamic,dynamic>> msg = [];

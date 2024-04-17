@@ -1,20 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:educonsult/core/app_export.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-// ignore: must_be_immutable
-class ConsulteechatlistItemWidget extends StatelessWidget {
-  const ConsulteechatlistItemWidget({Key? key})
-      : super(
-          key: key,
-        );
+
+class ConsulteechatlistItemWidget extends StatefulWidget {
+  final int index;
+  final List data;
+
+  const ConsulteechatlistItemWidget({
+    Key? key,
+    required this.index,
+    required this.data,
+  }) : super(key: key);
+
+  @override
+  _ConsulteechatlistItemWidgetState createState() =>
+      _ConsulteechatlistItemWidgetState();
+}
+
+class _ConsulteechatlistItemWidgetState
+    extends State<ConsulteechatlistItemWidget> {
+
+  late SharedPreferences prefCheckLogin;
+  var designation;
+  late String type = ''; // Initialize type here
+
+  @override
+  void initState() {
+    super.initState();
+    initializePreferences();
+  }
+
+  Future<void> initializePreferences() async {
+    prefCheckLogin = await SharedPreferences.getInstance();
+    designation = prefCheckLogin.getString("designation")!;
+    setState(() {
+
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
+
+    if (designation == "consultee") {
+      type = "consultantName";
+    } else {
+      type = "consulteeName";
+    }
+    print(type);
+    var name = widget.data[widget.index]['$type'] ?? '';
+
     return InkWell(
-      onTap: (){Navigator.pushNamed(context,'/chat_screen');},
+      onTap: () {
+        Navigator.pushNamed(context, '/chat_screen',arguments: name);
+      },
       child: Container(
         padding: EdgeInsets.all(7.h),
-        margin: EdgeInsets.only(left: 10,right: 10),
+        margin: EdgeInsets.only(left: 10, right: 10),
         decoration: AppDecoration.outlineIndigo.copyWith(
           borderRadius: BorderRadiusStyle.roundedBorder14,
         ),
@@ -22,19 +65,21 @@ class ConsulteechatlistItemWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             InkWell(
-              onTap: (){Navigator.pushNamed(context,'/chat_screen');},
+              onTap: () {
+                Navigator.pushNamed(context, '/chat_screen');
+              },
               child: CustomImageView(
                 imagePath: ImageConstant.imgEllipse12,
                 height: 50.adaptSize,
                 width: 50.adaptSize,
                 radius: BorderRadius.circular(
-                  25.h,
+                  25,
                 ),
               ),
             ),
             Padding(
               padding: EdgeInsets.only(
-                left: 6.h,
+                left: 6,
                 bottom: 10.v,
               ),
               child: Column(
@@ -54,7 +99,7 @@ class ConsulteechatlistItemWidget extends StatelessWidget {
             Spacer(),
             Padding(
               padding: EdgeInsets.only(
-                right: 7.h,
+                right: 7,
                 bottom: 9.v,
               ),
               child: Column(
@@ -67,7 +112,7 @@ class ConsulteechatlistItemWidget extends StatelessWidget {
                   Container(
                     width: 23.adaptSize,
                     padding: EdgeInsets.symmetric(
-                      horizontal: 6.h,
+                      horizontal: 6,
                       vertical: 1.v,
                     ),
                     decoration: AppDecoration.fillIndigo.copyWith(
