@@ -112,7 +112,7 @@ class _HomeScreenConsulteeScreenState extends State<HomeScreenConsulteeScreen> {
                     CustomElevatedButton(
                       onPressed: () {
                         Navigator.pushNamed(
-                            context, '/consultantChatLoader');
+                            context, '/consulteeChatLoader');
                       },
                       width: 134.h,
                       text: "Chats",

@@ -52,7 +52,7 @@ class ConsulteeProfileContainerScreen extends StatelessWidget {
       case BottomBarEnum.College:
         return AppRoutes.college_list_loader;
       case BottomBarEnum.Chat:
-        return AppRoutes.consultantChatLoader;
+        return AppRoutes.consulteechatLoader;
       case BottomBarEnum.Profile:
         return AppRoutes.consulteeProfileContainerScreen;
       default:
