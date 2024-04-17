@@ -63,7 +63,7 @@ class _ChatScreenState extends State<ChatScreen> {
      if(designation == "consultant")
        {
          consultee_name = name;
-         consultee_name = local_name;
+         consultant_name = local_name;
        }
      else{
        consultant_name = name;
@@ -105,7 +105,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
                void startTimer() {
                  // Create a timer that calls a method every 5 seconds
-                 _timer = Timer.periodic(Duration(seconds: 5), (timer) {
+                 _timer = Timer.periodic(Duration(seconds: 2), (timer) {
                    // Call your method here
                    getChat(context);
                  });

@@ -26,8 +26,15 @@ class _ConsulteeProfilePageState extends State<ConsulteeProfilePage> {
     initializePreferences();
   }
 
+  var name;
+  late SharedPreferences prefCheckLogin;
+
   Future<void> initializePreferences() async {
     prefs = await SharedPreferences.getInstance();
+    prefCheckLogin  = await SharedPreferences.getInstance();
+    name = prefCheckLogin.getString("name")!;
+
+    print(name);
   }
 
   @override
