@@ -1,22 +1,86 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:educonsult/core/app_export.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../core/database_ip.dart';
 import '../../widgets/custom_bottom_bar_consultant.dart';
 import '../../widgets/custom_drop_down.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_form_field.dart';
+import 'package:http/http.dart' as http;
 
-class ConsultantProfileScreen extends StatelessWidget {
+
+class ConsultantProfileScreen extends StatefulWidget {
   ConsultantProfileScreen({Key? key}) : super(key: key);
 
+  @override
+  _ConsultantProfileScreenState createState() =>
+      _ConsultantProfileScreenState();
+}
+
+class _ConsultantProfileScreenState extends State<ConsultantProfileScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController twentyTwoController = TextEditingController();
   TextEditingController twentyTwoController1 = TextEditingController();
   List<String> dropdownItemList = ["Second Year", "Third Year", "Fourth Year"];
+  var prefCheckLogin;
   var prefs;
+  var name;
+  var username;
+  var email;
+  var college;
+  var branch;
+  var year;
+
+  @override
+  void initState() {
+    super.initState();
+    initializePreferences();
+  }
+
+  Future<void> initializePreferences() async {
+    prefCheckLogin  = await SharedPreferences.getInstance();
+    name = prefCheckLogin.getString("name")!;
+
+    print(name);
+
+    getProfileData(context);
+  }
+
+  Future<void> getProfileData(BuildContext context) async {
+    try {
+      DB_IP a = DB_IP();
+      String ip = a.getIpAddr();
+      var url = Uri.parse("http://$ip/Educonsult_API/consultant_profile.php");
+
+      var response = await http.post(url, body: {
+        'name': name,
+      });
+
+      if (response.body.isNotEmpty) {
+        var decodedBody = jsonDecode(response.body);
+
+        print(decodedBody);
+        username = decodedBody[0]['Name'];
+        email = decodedBody[0]['Email'];
+        college = decodedBody[0]['College'];
+        branch = decodedBody[0]['Branch'];
+        year = decodedBody[0]['Year'];
+
+        setState(() {
+
+        });
+
+      }
+    } catch (e) {
+      print("Fetch ProfileData Error: $e");
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -101,11 +165,9 @@ class ConsultantProfileScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 3.v),
                     CustomDropDown(
-                      hintText: "Second Year",
+                      hintText: "$year",
                       items: dropdownItemList,
                     ),
-                    SizedBox(height: 36.v),
-                    _buildSaveChanges(context),
                     SizedBox(height: 36.v),
                     Center(
                       child: SizedBox(
@@ -162,7 +224,7 @@ class ConsultantProfileScreen extends StatelessWidget {
   Widget _buildName(BuildContext context) {
     return CustomTextFormField(
       controller: nameController,
-      hintText: "Enter Name",
+      hintText: "$username",
       autofocus: false,
     );
   }
@@ -170,7 +232,7 @@ class ConsultantProfileScreen extends StatelessWidget {
   Widget _buildEmail(BuildContext context) {
     return CustomTextFormField(
       controller: emailController,
-      hintText: "Enter Email Id",
+      hintText: "$email",
       textInputType: TextInputType.emailAddress,
       autofocus: false,
     );
@@ -179,7 +241,7 @@ class ConsultantProfileScreen extends StatelessWidget {
   Widget _buildTwentyTwo(BuildContext context) {
     return CustomTextFormField(
       controller: twentyTwoController,
-      hintText: "Enter College Name",
+      hintText: "$college",
       autofocus: false,
     );
   }
@@ -187,7 +249,7 @@ class ConsultantProfileScreen extends StatelessWidget {
   Widget _buildTwentyTwo1(BuildContext context) {
     return CustomTextFormField(
       controller: twentyTwoController1,
-      hintText: "Enter Department",
+      hintText: "$branch",
       textInputAction: TextInputAction.done,
       autofocus: false,
     );

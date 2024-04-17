@@ -123,7 +123,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     name = ModalRoute.of(context)?.settings.arguments as String?;
-
+    getChat(context);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -255,10 +255,10 @@ class _ChatScreenState extends State<ChatScreen> {
               children: [
                 AppbarTitleCircleimage(imagePath: ImageConstant.imgEllipse12),
                 Padding(
-                  padding: EdgeInsets.only(left: 0.h, bottom: 3.v),
+                  padding: EdgeInsets.only(left: 10.h, bottom: 3.v),
                   child: Column(
                     children: [
-                      AppbarSubtitleOne(text: "$consultee_name"),
+                      AppbarSubtitleOne(text: "$name"),
                       SizedBox(height: 1.v),
                       AppbarSubtitleTwo(
                         text: "Online",

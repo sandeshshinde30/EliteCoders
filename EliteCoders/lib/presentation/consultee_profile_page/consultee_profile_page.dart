@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,6 +8,10 @@ import 'package:educonsult/widgets/app_bar/custom_app_bar.dart';
 import 'package:educonsult/widgets/custom_text_form_field.dart';
 import 'package:educonsult/widgets/custom_elevated_button.dart';
 import 'package:educonsult/core/app_export.dart';
+import 'package:http/http.dart' as http;
+
+
+import '../../core/database_ip.dart';
 
 class ConsulteeProfilePage extends StatefulWidget {
   ConsulteeProfilePage({Key? key}) : super(key: key);
@@ -28,6 +34,8 @@ class _ConsulteeProfilePageState extends State<ConsulteeProfilePage> {
 
   var name;
   late SharedPreferences prefCheckLogin;
+  var username;
+  var email;
 
   Future<void> initializePreferences() async {
     prefs = await SharedPreferences.getInstance();
@@ -35,7 +43,36 @@ class _ConsulteeProfilePageState extends State<ConsulteeProfilePage> {
     name = prefCheckLogin.getString("name")!;
 
     print(name);
+
+    getProfileData(context);
   }
+
+  Future<void> getProfileData(BuildContext context) async {
+    try {
+      DB_IP a = DB_IP();
+      String ip = a.getIpAddr();
+      var url = Uri.parse("http://$ip/Educonsult_API/consultee_profile.php");
+
+      var response = await http.post(url, body: {
+        'name': name,
+      });
+
+      if (response.body.isNotEmpty) {
+        var decodedBody = jsonDecode(response.body);
+
+        username = decodedBody[0]['Name'];
+        email = decodedBody[0]['Email'];
+
+        setState(() {
+
+        });
+
+      }
+    } catch (e) {
+      print("Fetch ProfileData Error: $e");
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +131,7 @@ class _ConsulteeProfilePageState extends State<ConsulteeProfilePage> {
                   CustomTextFormField(
                     autofocus: false,
                     controller: nameController,
-                    hintText: "Enter Name",
+                    hintText: "$name",
                   ),
                   SizedBox(height: 11.v),
                   Text(
@@ -105,17 +142,12 @@ class _ConsulteeProfilePageState extends State<ConsulteeProfilePage> {
                   CustomTextFormField(
                     autofocus: false,
                     controller: emailController,
-                    hintText: "Enter Email Id",
+                    hintText: "$email",
                     textInputAction: TextInputAction.done,
                     textInputType: TextInputType.emailAddress,
                   ),
                   SizedBox(height: 50.v),
-                  CustomElevatedButton(
-                    height: 45.v,
-                    width: 221.h,
-                    text: "Save changes",
-                    alignment: Alignment.center,
-                  ),
+
                   SizedBox(height: 30.v),
                   Center(
                     child: SizedBox(
@@ -139,12 +171,12 @@ class _ConsulteeProfilePageState extends State<ConsulteeProfilePage> {
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(Color(
-                              0xffd7e5fd)),
+                              0xff172452)),
                         ),
                         child: Text(
                           'Log Out',
                           style: TextStyle(
-                            color: Color(0xff172452),
+                            color: Colors.white,
                             fontSize: 18,
                           ),
                         ),
