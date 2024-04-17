@@ -133,68 +133,71 @@ class _ChatScreenState extends State<ChatScreen> {
           child: Column(
             children: [
               Expanded(
-                child: ListView.builder(
-                  itemCount: msg.length,
-                  itemBuilder: (context, index) {
-                    String des = msg[index]['designation'];
-                    return des == designation
-                        ? Align(
-                      alignment: Alignment.centerRight,
-                      child: Container(
-                        margin: EdgeInsets.only(top: 10),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 23.h,
-                          vertical: 11.v,
-                        ),
-                        decoration: AppDecoration.fillBlue.copyWith(
-                          borderRadius: BorderRadiusStyle.roundedBorder14,
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 185.h,
-                              margin: EdgeInsets.only(right: 12.h),
-                              child: Text(
-                                msg[index]['chat'].toString(),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 218, 225, 221),
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  child: ListView.builder(
+                    itemCount: msg.length,
+                    itemBuilder: (context, index) {
+                      String des = msg[index]['designation'];
+                      return des == designation
+                          ? Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          margin: EdgeInsets.only(top: 10),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 23.h,
+                            vertical: 11.v,
+                          ),
+                          decoration: AppDecoration.fillBlue.copyWith(
+                            borderRadius: BorderRadiusStyle.roundedBorder14,
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                width: 185.h,
+                                margin: EdgeInsets.only(right: 12.h),
+                                child: Text(
+                                  msg[index]['chat'].toString(),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 218, 225, 221),
+                                  ),
                                 ),
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                        : Align(
-                      alignment: Alignment.centerLeft,
-                      child: Container(
-                        margin: EdgeInsets.only(top: 10),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 23.h,
-                          vertical: 11.v,
+                      )
+                          : Align(
+                        alignment: Alignment.centerLeft,
+                        child: Container(
+                          margin: EdgeInsets.only(top: 10),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 23.h,
+                            vertical: 11.v,
+                          ),
+                          decoration: AppDecoration.fillOnPrimaryContainer.copyWith(
+                            borderRadius: BorderRadiusStyle.roundedBorder14,
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                width: 185.h,
+                                margin: EdgeInsets.only(right: 12.h),
+                                child: Text(
+                                  msg[index]['chat'].toString(),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: theme.textTheme.bodyMedium,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                        decoration: AppDecoration.fillOnPrimaryContainer.copyWith(
-                          borderRadius: BorderRadiusStyle.roundedBorder14,
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 185.h,
-                              margin: EdgeInsets.only(right: 12.h),
-                              child: Text(
-                                msg[index]['chat'].toString(),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: theme.textTheme.bodyMedium,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
               SizedBox(height: 10,),
@@ -217,9 +220,12 @@ class _ChatScreenState extends State<ChatScreen> {
                     },
                     width: MediaQuery.of(context).size.width * 0.2,
                     text: "Send",
-                  )
+
+                    // lefIcon: Icon(Icons.send,size: 60,),
+                  ),
                 ],
               ),
+              SizedBox(height: 10,)
             ],
           ),
         ),
@@ -249,14 +255,14 @@ class _ChatScreenState extends State<ChatScreen> {
               children: [
                 AppbarTitleCircleimage(imagePath: ImageConstant.imgEllipse12),
                 Padding(
-                  padding: EdgeInsets.only(left: 13.h, bottom: 3.v),
+                  padding: EdgeInsets.only(left: 0.h, bottom: 3.v),
                   child: Column(
                     children: [
                       AppbarSubtitleOne(text: "$consultee_name"),
                       SizedBox(height: 1.v),
                       AppbarSubtitleTwo(
                         text: "Online",
-                        margin: EdgeInsets.only(right: 40.h),
+                        margin: EdgeInsets.only(right: 0.h),
                       ),
                     ],
                   ),
