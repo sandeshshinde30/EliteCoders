@@ -228,7 +228,9 @@ class _RequestlistItemWidgetState extends State<RequestlistItemWidget> {
   Future<void> createTable(BuildContext context) async {
     var data;
     try {
-      var url = Uri.parse("http://192.168.52.145/Educonsult_API/create_chat_table.php");
+      DB_IP a = DB_IP();
+      String ip = a.getIpAddr();
+      var url = Uri.parse("http://$ip/Educonsult_API/create_chat_table.php");
 
       var response = await http.post(url, body: {
         'ConsultantName': consultant_name,

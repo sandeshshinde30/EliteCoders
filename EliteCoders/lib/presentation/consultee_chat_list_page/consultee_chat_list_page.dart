@@ -12,8 +12,25 @@ class ConsulteeChatListPage extends StatelessWidget {
 
   TextEditingController searchController = TextEditingController();
 
+  late List<dynamic> data = [];
+
   @override
   Widget build(BuildContext context) {
+    data = [...ModalRoute.of(context)?.settings.arguments as List? ?? []];
+    if (data == null || data!.isEmpty) {
+      // Timer(Duration(seconds:1),()=>Navigator.pushReplacementNamed(context,'/home_screen_consultant_screen'));
+      return Scaffold(
+        appBar: AppBar(
+          leading: InkWell(
+              onTap: (){Navigator.pushReplacementNamed(context,'/home_screen_consultee_screen');},
+              child: Icon(Icons.arrow_back)),
+          title: Text('Chats'),
+        ),
+        body: Center(
+          child: Text("You don't have any chats"),
+        ),
+      );
+    }
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -58,9 +75,13 @@ class ConsulteeChatListPage extends StatelessWidget {
             height: 18.v,
           );
         },
-        itemCount: 3,
+        itemCount: data!.length,
+
         itemBuilder: (context, index) {
-          return ConsulteechatlistItemWidget();
+          return ConsulteechatlistItemWidget(
+            index: index, // Pass index as named argument
+            data: data,
+          );
         },
       ),
     );

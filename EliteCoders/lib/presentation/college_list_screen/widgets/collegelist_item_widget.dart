@@ -70,6 +70,7 @@ class CollegelistItemWidget extends StatelessWidget {
     try {
       DB_IP a = DB_IP();
       String ip = a.getIpAddr();
+      print(ip);
       var url = Uri.parse("http://$ip/Educonsult_API/fetch_consultants.php");
 
       var response = await http.post(url, body: {
