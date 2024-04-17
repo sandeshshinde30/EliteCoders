@@ -25,6 +25,7 @@ import '../presentation/login_register_screen/login_register_screen.dart';
 import '../presentation/login_screen/login_screen.dart';
 import '../presentation/registration_screen/registration_screen.dart';
 import '../presentation/app_navigation_screen/app_navigation_screen.dart';
+import '../presentation/consultee_chat_list_page/consultee_chat_list_page.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splash_screen';
@@ -93,6 +94,7 @@ class AppRoutes {
       '/consulteeChatLoader';
 
   static Map<String, WidgetBuilder> routes = {
+    consulteeChatListPage: (context) => ConsulteeChatListPage(),
     splashScreen: (context) => SplashScreen(),
     loginRegisterScreen: (context) => LoginRegisterScreen(),
     loginScreen: (context) => LoginScreen(),
