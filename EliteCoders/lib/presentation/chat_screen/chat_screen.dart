@@ -46,6 +46,8 @@ class _ChatScreenState extends State<ChatScreen> {
    var consultant_name;
    var consultee_name;
    var designation;
+   var name;
+   var local_name;
 
   @override
   void initState() {
@@ -55,13 +57,26 @@ class _ChatScreenState extends State<ChatScreen> {
 
    Future<void> initializePreferences() async {
      prefCheckLogin  = await SharedPreferences.getInstance();
-     consultant_name = prefCheckLogin.getString("name")!;
+     local_name = prefCheckLogin.getString("name")!;
      designation = prefCheckLogin.getString("designation")!;
 
-     getChat(context,consultee_name);
+     if(designation == "consultant")
+       {
+         consultee_name = name;
+         consultee_name = local_name;
+       }
+     else{
+       consultant_name = name;
+       consultee_name = local_name;
+     }
+
+     print("Consultant name : $consultant_name");
+     print("Consultee name : $consultee_name");
+
+     getChat(context);
    }
 
-   Future<void> getChat(BuildContext context,String consultee_name) async
+   Future<void> getChat(BuildContext context) async
    {
      try {
        DB_IP a = DB_IP();
@@ -92,7 +107,7 @@ class _ChatScreenState extends State<ChatScreen> {
                  // Create a timer that calls a method every 5 seconds
                  _timer = Timer.periodic(Duration(seconds: 5), (timer) {
                    // Call your method here
-                   getChat(context, consultee_name);
+                   getChat(context);
                  });
                  startTimer();
                }
@@ -152,9 +167,11 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     // consultee_name = [...?ModalRoute.of(context)?.settings.arguments as String? ?? []];
-    consultee_name = ModalRoute.of(context)?.settings.arguments as String?;
+    name = ModalRoute.of(context)?.settings.arguments as String?;
 
-    if(consultee_name != null) getChat(context,consultee_name);
+
+       // if(name != null) getChat(context,name);
+    getChat(context);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -199,7 +216,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         itemBuilder: (context, index) {
                           String des = msg[index]['designation'];
                           // If number is even, display 'Even', else display 'Odd'
-                          return des == "consultant"
+                          return des == designation
                               ? Align(
                             alignment: Alignment.centerRight,
                             child: Container(
@@ -286,7 +303,6 @@ class _ChatScreenState extends State<ChatScreen> {
                   },
                     width: MediaQuery.of(context).size.width * 0.2,
                     text: "Send"
-
                 )
               ]
             ),
