@@ -112,7 +112,7 @@ class ConsulteeChatListPage extends StatelessWidget {
       case BottomBarEnum.Chat:
         return AppRoutes.consulteechatLoader;
       case BottomBarEnum.Profile:
-        return AppRoutes.consulteeProfilePage;
+        return AppRoutes.consulteeProfileContainerScreen;
       default:
         return '/';
     }

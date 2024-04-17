@@ -12,6 +12,7 @@ import '../presentation/consultant_profile_screen/consultant_profile_screen.dart
 import '../presentation/consultee_chat_list_container_screen/consultee_chat_list_container_screen.dart';
 import '../presentation/consultee_chat_list_page/consutee_chat_loader.dart';
 import '../presentation/consultee_profile_container_screen/consultee_profile_container_screen.dart';
+import '../presentation/consultee_profile_page/consultee_profile_page.dart';
 import '../presentation/home_screen_consultant_screen/home_screen_consultant_screen.dart';
 import '../presentation/home_screen_consultee_screen/home_screen_consultee_screen.dart';
 import '../presentation/i_am_screen/i_am_screen.dart';
@@ -122,5 +123,6 @@ class AppRoutes {
     consultantChatLoader : (context) => consultant_chat_loader(),
     consultantChatListPage : (context) => ConsultantChatListPage(),
     consulteechatLoader : (context) => consulteeChatLoader(),
+    consulteeProfilePage : (context) => ConsulteeProfilePage()
   };
 }
