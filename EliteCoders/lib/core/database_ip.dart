@@ -4,6 +4,6 @@ class DB_IP
 {
   String getIpAddr()
   {
-    return "192.168.35.145";
+    return "192.168.94.145";
   }
 }

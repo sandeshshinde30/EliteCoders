@@ -116,7 +116,9 @@ class _ChatScreenState extends State<ChatScreen> {
    Future<void> sendMsg(BuildContext context) async
    {
      try {
-       var url = Uri.parse("http://192.168.52.145/Educonsult_API/send_msg.php");
+       DB_IP a = DB_IP();
+       String ip = a.getIpAddr();
+       var url = Uri.parse("http://$ip/Educonsult_API/send_msg.php");
 
        print(sendController.text.toString());
        var response = await http.post(url, body: {
